@@ -1,3 +1,7 @@
+This Port should work with ROS2 humble, not tested on iron.
+
+An installation of nlopt is required beforehand. See nlopt folder.
+
 # trac_ik
 
 ROS 2 port of `trac_ik`, an alternative Inverse Kinematics solver to the popular inverse Jacobian methods in KDL.

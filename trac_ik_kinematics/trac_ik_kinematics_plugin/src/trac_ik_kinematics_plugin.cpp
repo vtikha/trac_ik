@@ -148,8 +148,13 @@ namespace trac_ik_kinematics_plugin
 
     // ###
 
-    lookupParam(node_, "position_only_ik", position_ik_, false);
-    lookupParam(node_, "solve_type", solve_type, std::string("Speed"));
+    // Declare parameters with default values
+    node_->declare_parameter("position_only_ik", false);
+    node_->declare_parameter("solve_type", std::string("Speed"));
+
+    // Get parameters
+    node_->get_parameter("position_only_ik", position_ik_);
+    node_->get_parameter("solve_type", solve_type);
 
     initialized_ = true;
     return true;
@@ -158,7 +163,7 @@ namespace trac_ik_kinematics_plugin
   int TRAC_IKKinematicsPlugin::getKDLSegmentIndex(const std::string &name) const
   {
     int i = 0;
-    while (i < (int)chain.getNrOfSegments())
+    while (i < static_cast<int>(chain.getNrOfSegments()))
     {
       if (chain.getSegment(i).getName() == name)
       {
@@ -317,8 +322,8 @@ namespace trac_ik_kinematics_plugin
                                                  std::vector<double> &solution,
                                                  const IKCallbackFn &solution_callback,
                                                  moveit_msgs::msg::MoveItErrorCodes &error_code,
-                                                 const std::vector<double> &consistency_limits,
-                                                 const kinematics::KinematicsQueryOptions &options) const
+                                                 const std::vector<double> & /*consistency_limits*/,
+                                                 const kinematics::KinematicsQueryOptions & /*options*/) const
   {
     RCLCPP_DEBUG_STREAM(LOGGER, "getPositionIK");
 
@@ -394,7 +399,7 @@ namespace trac_ik_kinematics_plugin
         }
         else
         {
-          RCLCPP_DEBUG(LOGGER, "Solution has error code %i", error_code);
+          RCLCPP_DEBUG(LOGGER, "Solution has error code %i", error_code.val);
           return false;
         }
       }

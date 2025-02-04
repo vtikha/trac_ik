@@ -148,13 +148,24 @@ namespace trac_ik_kinematics_plugin
 
     // ###
 
-    // Declare parameters with default values
-    node_->declare_parameter("position_only_ik", false);
-    node_->declare_parameter("solve_type", std::string("Speed"));
-
     // Get parameters
-    node_->get_parameter("position_only_ik", position_ik_);
-    node_->get_parameter("solve_type", solve_type);
+    if (node_->has_parameter("position_only_ik"))
+    {
+      node_->get_parameter("position_only_ik", position_ik_);
+    }
+    else
+    {
+      position_ik_ = false;  // Assign default value
+    }
+
+    if (node_->has_parameter("solve_type"))
+    {
+      node_->get_parameter("solve_type", solve_type);
+    }
+    else
+    {
+      solve_type = "Speed";  // Assign default value
+    }
 
     initialized_ = true;
     return true;

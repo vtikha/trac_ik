@@ -42,10 +42,10 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <moveit_msgs/msg/move_it_error_codes.hpp>
 
 // MoveIt
-#include <moveit/kinematics_base/kinematics_base.h>
+#include <moveit/kinematics_base/kinematics_base.hpp>
 // #include <moveit/kdl_kinematics_plugin/joint_mimic.hpp>
-#include <moveit/robot_model/robot_model.h>
-#include <moveit/robot_state/robot_state.h>
+#include <moveit/robot_model/robot_model.hpp>
+#include <moveit/robot_state/robot_state.hpp>
 
 #include <kdl/chain.hpp>
 #include <kdl/config.h>
